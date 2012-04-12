@@ -44,6 +44,8 @@ public class ParseTocView
 
 	public void display()
 	{
+		template.getSubTitle().setText(commonUiStrings.ParseTOC());
+		
 		final VerticalPanel topLevelPanel = new VerticalPanel();
 
 		topLevelPanel.add(new HTML(uiStrings.Description()));

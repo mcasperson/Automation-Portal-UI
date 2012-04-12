@@ -48,6 +48,8 @@ public class BugzillaReportGeneratorView
 
 	public void display()
 	{
+		template.getSubTitle().setText(commonUiStrings.BugzillaReportGenerator());
+		
 		final VerticalPanel topLevelPanel = new VerticalPanel();
 
 		topLevelPanel.add(new HTML(uiStrings.Description()));
@@ -97,11 +99,11 @@ public class BugzillaReportGeneratorView
 		});
 		topLevelPanel.add(go);
 		
-		template.getContentPanel().setWidget(topLevelPanel);
-		
 		final HTML requirements = new HTML(uiStrings.Requirements());
 		requirements.getElement().getStyle().setMarginTop(2, Unit.EM);
 		topLevelPanel.add(requirements);
+		
+		template.getContentPanel().setWidget(topLevelPanel);
 	}
 
 	private void run()

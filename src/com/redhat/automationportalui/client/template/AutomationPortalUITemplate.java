@@ -24,8 +24,15 @@ public class AutomationPortalUITemplate
 	/** A reference to the common translated strings */
 	final private CommonUIStrings commonUiStrings;
 	/** The panel that will hold the links to the various views */
-	final VerticalPanel linksVerticalPanel;
+	final private VerticalPanel linksVerticalPanel;
+	/** The subtitle applied to the page */
+	private final Label subTitle;
 	
+	public Label getSubTitle()
+	{
+		return subTitle;
+	}
+
 	public SimplePanel getContentPanel()
 	{
 		return contentPanel;
@@ -41,6 +48,13 @@ public class AutomationPortalUITemplate
 		heading.getElement().getStyle().setFontSize(4, Unit.EM);
 		heading.getElement().getStyle().setMargin(0.5, Unit.EM);
 		verticalPanel.add(heading);
+		
+		subTitle = new Label();
+		subTitle.getElement().getStyle().setFontSize(2, Unit.EM);
+		subTitle.getElement().getStyle().setMarginLeft(1, Unit.EM);
+		subTitle.getElement().getStyle().setMarginRight(1, Unit.EM);
+		subTitle.getElement().getStyle().setMarginBottom(1, Unit.EM);
+		verticalPanel.add(subTitle);
 		
 		final HorizontalPanel horizontalPanel = new HorizontalPanel();
 		verticalPanel.add(horizontalPanel);
@@ -65,7 +79,6 @@ public class AutomationPortalUITemplate
 		final AutomationPortalUIAppPlaceHistoryMapper placeHistoryMapper = GWT.create(AutomationPortalUIAppPlaceHistoryMapper.class);
 		
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace())));
-		linksVerticalPanel.add(new Hyperlink(commonUiStrings.ParseTOC(), placeHistoryMapper.getToken(new ParseTocPlace())));
-		
+		linksVerticalPanel.add(new Hyperlink(commonUiStrings.ParseTOC(), placeHistoryMapper.getToken(new ParseTocPlace())));		
 	}
 }
