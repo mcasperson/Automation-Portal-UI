@@ -1,0 +1,8 @@
+[core]
+	repositoryformatversion = 0
+	filemode = true
+	logallrefupdates = true
+	autocrlf = false
+[remote "origin"]
+	url = git@github.com:mcasperson/Automation-Portal-UI.git
+	fetch = +refs/heads/*:refs/remotes/origin/*
