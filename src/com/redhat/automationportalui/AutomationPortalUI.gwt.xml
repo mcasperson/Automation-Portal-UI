@@ -27,5 +27,8 @@
     <replace-with class="com.redhat.automationportalui.client.AutomationPortalUIClientFactoryImpl">
     	<when-type-is class="com.redhat.automationportalui.client.AutomationPortalUIClientFactory"/>
     </replace-with>
+    
+    <!--  disable logging - https://developers.google.com/web-toolkit/doc/latest/DevGuideLogging -->
+    <set-property name="gwt.logging.enabled" value="FALSE"/> 
 
 </module>
