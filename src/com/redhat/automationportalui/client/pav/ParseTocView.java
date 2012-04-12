@@ -6,7 +6,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
-import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
@@ -24,21 +23,18 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
-import com.google.gwt.http.client.URL;
 
-public class BugzillaReportGeneratorView
+public class ParseTocView
 {
-	private final static String REST_ENDPOINT = "rest/BugzillaReportGenerator/get/json";
+	private final static String REST_ENDPOINT = "rest/ParseTOC/get/json";
 	private final AutomationPortalUITemplate template;
 	private final BugzillaReportGeneratorUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
-	private TextBox bugzillaUsername;
-	private PasswordTextBox bugzillaPassword; 
 	private TextBox message;
 	private TextArea output;
 	private PushButton go;
 
-	public BugzillaReportGeneratorView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
+	public ParseTocView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
 		/* Get the translates log messages */
 		uiStrings = (BugzillaReportGeneratorUIStrings) GWT.create(BugzillaReportGeneratorUIStrings.class);
@@ -56,31 +52,21 @@ public class BugzillaReportGeneratorView
 		descriptionLineTwo.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineTwo);
 		
-		final Grid grid = new Grid(4, 2); 
+		final Grid grid = new Grid(2, 2); 
 		topLevelPanel.add(grid);
-		
-		bugzillaUsername = new TextBox();
-		bugzillaUsername.setWidth("40em");
-		grid.setWidget(0, 0, new HTML(uiStrings.BugzillaUsername()));
-		grid.setWidget(0, 1, bugzillaUsername);
-		
-		bugzillaPassword = new PasswordTextBox();
-		bugzillaPassword.setWidth("40em");
-		grid.setWidget(1, 0, new HTML(uiStrings.BugzillaPassword()));
-		grid.setWidget(1, 1, bugzillaPassword);
 		
 		message = new TextBox();
 		message.setReadOnly(true);
 		message.setWidth("40em");
-		grid.setWidget(2, 0, new HTML(commonUiStrings.Message()));
-		grid.setWidget(2, 1, message);
+		grid.setWidget(0, 0, new HTML(commonUiStrings.Message()));
+		grid.setWidget(0, 1, message);
 		
 		output = new TextArea();
 		output.setReadOnly(true);
 		output.setWidth("40em");
 		output.setHeight("10em");
-		grid.setWidget(3, 0, new HTML(commonUiStrings.Output()));
-		grid.setWidget(3, 1, output);
+		grid.setWidget(1, 0, new HTML(commonUiStrings.Output()));
+		grid.setWidget(1, 1, output);
 		
 		go = new PushButton(commonUiStrings.Go());
 		go.setWidth("10em");
@@ -108,10 +94,7 @@ public class BugzillaReportGeneratorView
 	{
 		enableUI(false);
 		
-		final String username = bugzillaUsername.getText();
-		final String password = bugzillaPassword.getText();
-		
-		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + "?bugzillaUsername=" + URL.encode(username) + "&bugzillaPassword=" + URL.encode(password); 
+		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT; 
 		
 		// Send request to server and catch any errors.
 		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, restUrl);
@@ -157,7 +140,5 @@ public class BugzillaReportGeneratorView
 	private void enableUI(final boolean enabled)
 	{
 		go.setEnabled(enabled);
-		bugzillaUsername.setEnabled(enabled);
-		bugzillaPassword.setEnabled(enabled);	
 	}
 }

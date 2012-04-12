@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.redhat.automationportalui.client.AutomationPortalUIAppPlaceHistoryMapper;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
+import com.redhat.automationportalui.client.pav.ParseTocPlace;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
 
 /**
@@ -63,7 +64,8 @@ public class AutomationPortalUITemplate
 	{
 		final AutomationPortalUIAppPlaceHistoryMapper placeHistoryMapper = GWT.create(AutomationPortalUIAppPlaceHistoryMapper.class);
 		
-		final Hyperlink bugzillaReportGenerator = new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace()));
-		linksVerticalPanel.add(bugzillaReportGenerator);
+		linksVerticalPanel.add(new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace())));
+		linksVerticalPanel.add(new Hyperlink(commonUiStrings.ParseTOC(), placeHistoryMapper.getToken(new ParseTocPlace())));
+		
 	}
 }

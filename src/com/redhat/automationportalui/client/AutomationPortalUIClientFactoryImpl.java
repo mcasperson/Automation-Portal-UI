@@ -4,6 +4,7 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorView;
+import com.redhat.automationportalui.client.pav.ParseTocView;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
 import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
@@ -14,6 +15,7 @@ public class AutomationPortalUIClientFactoryImpl implements AutomationPortalUICl
     private final PlaceController placeController = new PlaceController(eventBus);
     
     private BugzillaReportGeneratorView bugzillaReportGeneratorView;
+    private ParseTocView parseTocView;
     
 	@Override
 	public PlaceController getPlaceController()
@@ -37,7 +39,14 @@ public class AutomationPortalUIClientFactoryImpl implements AutomationPortalUICl
 	public void initialise(final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
 		bugzillaReportGeneratorView = new BugzillaReportGeneratorView(this, template, commonUiStrings, apuiErrors);
+		parseTocView = new ParseTocView(this, template, commonUiStrings, apuiErrors);
 		
+	}
+
+	@Override
+	public ParseTocView getParseTocView()
+	{
+		return parseTocView;
 	}
 
 }
