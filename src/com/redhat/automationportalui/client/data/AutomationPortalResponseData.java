@@ -6,12 +6,12 @@ public final class AutomationPortalResponseData extends JavaScriptObject
 {
 	public final native String getMessage()
 	/*-{
-		return message;
+		return this.message;
 	}-*/;
 
 	public final native String getOutput()
 	/*-{
-		return output;
+		return this.output;
 	}-*/;
 
 	protected AutomationPortalResponseData()

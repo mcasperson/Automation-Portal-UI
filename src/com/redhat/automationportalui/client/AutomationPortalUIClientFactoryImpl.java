@@ -5,6 +5,7 @@ import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorView;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
+import com.redhat.automationportalui.client.resources.CommonUIStrings;
 
 public class AutomationPortalUIClientFactoryImpl implements AutomationPortalUIClientFactory
 {
@@ -32,9 +33,9 @@ public class AutomationPortalUIClientFactoryImpl implements AutomationPortalUICl
 	}
 
 	@Override
-	public void initialise(APUI_Errors apuiErrors)
+	public void initialise(final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
-		bugzillaReportGeneratorView = new BugzillaReportGeneratorView(this, apuiErrors);
+		bugzillaReportGeneratorView = new BugzillaReportGeneratorView(this, commonUiStrings, apuiErrors);
 		
 	}
 

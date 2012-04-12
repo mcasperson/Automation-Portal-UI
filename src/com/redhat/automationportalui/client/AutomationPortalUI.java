@@ -17,6 +17,7 @@ import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
+import com.redhat.automationportalui.client.resources.CommonUIStrings;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -36,10 +37,13 @@ public class AutomationPortalUI implements EntryPoint
 	{	
 		/* Get the translates log messages */
 		final APUI_Errors apuiErrors = (APUI_Errors) GWT.create(APUI_Errors.class);
+		
+		/* Get the translated CommonUI Strings */
+		final CommonUIStrings commonUiStrings = (CommonUIStrings) GWT.create(CommonUIStrings.class);
 
 		/* Get the client factory */
 		final AutomationPortalUIClientFactory topikaClientFactory = GWT.create(AutomationPortalUIClientFactory.class);
-		topikaClientFactory.initialise(apuiErrors);
+		topikaClientFactory.initialise(commonUiStrings, apuiErrors);
 
 		final EventBus eventBus = topikaClientFactory.getEventBus();
 		final PlaceController placeController = topikaClientFactory.getPlaceController();
