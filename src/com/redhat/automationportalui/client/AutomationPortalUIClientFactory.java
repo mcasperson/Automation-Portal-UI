@@ -5,6 +5,7 @@ import com.google.gwt.place.shared.PlaceController;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorView;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
+import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
 
 /**
  * See https://developers.google.com/web-toolkit/doc/latest/
@@ -20,5 +21,5 @@ public interface AutomationPortalUIClientFactory
 	
 	BugzillaReportGeneratorView getBugzillaReportGeneratorView();
 	
-	public void initialise(final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors);
+	public void initialise(final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors);
 }

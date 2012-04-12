@@ -16,11 +16,12 @@ import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.redhat.automationportalui.client.AutomationPortalUIClientFactory;
-import com.redhat.automationportalui.client.AutomationPortalUIConstants;
+import com.redhat.automationportalui.client.constants.AutomationPortalUIConstants;
 import com.redhat.automationportalui.client.data.AutomationPortalResponseData;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.BugzillaReportGeneratorUIStrings;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
+import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
@@ -31,6 +32,7 @@ import com.google.gwt.http.client.URL;
 public class BugzillaReportGeneratorView
 {
 	private final static String REST_ENDPOINT = "rest/BugzillaReportGenerator/get/json";
+	private final AutomationPortalUITemplate template;
 	private final BugzillaReportGeneratorUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
 	private TextBox bugzillaUsername;
@@ -39,14 +41,15 @@ public class BugzillaReportGeneratorView
 	private TextArea output;
 	private PushButton go;
 
-	public BugzillaReportGeneratorView(final AutomationPortalUIClientFactory clientFactory, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
+	public BugzillaReportGeneratorView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
 		/* Get the translates log messages */
 		uiStrings = (BugzillaReportGeneratorUIStrings) GWT.create(BugzillaReportGeneratorUIStrings.class);
 		this.commonUiStrings = commonUiStrings;
+		this.template = template;
 	}
 
-	public void display(final AcceptsOneWidget panel)
+	public void display()
 	{
 		final VerticalPanel topLevelPanel = new VerticalPanel();
 
@@ -97,7 +100,7 @@ public class BugzillaReportGeneratorView
 		});
 		topLevelPanel.add(go);
 		
-		panel.setWidget(topLevelPanel);
+		template.getContentPanel().setWidget(topLevelPanel);
 		
 		final HTML requirements = new HTML(uiStrings.Requirements());
 		requirements.getElement().getStyle().setMarginTop(2, Unit.EM);

@@ -18,6 +18,6 @@ public class BugzillaReportGeneratorActivity extends AbstractActivity
 	@Override
 	public void start(final AcceptsOneWidget panel, final EventBus eventBus)
 	{
-		clientFactory.getBugzillaReportGeneratorView().display(panel);
+		clientFactory.getBugzillaReportGeneratorView().display();
 	}
 }

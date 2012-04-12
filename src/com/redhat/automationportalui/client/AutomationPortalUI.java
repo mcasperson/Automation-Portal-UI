@@ -18,6 +18,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
+import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
 
 /**
  * Entry point classes define <code>onModuleLoad()</code>.
@@ -40,10 +41,13 @@ public class AutomationPortalUI implements EntryPoint
 		
 		/* Get the translated CommonUI Strings */
 		final CommonUIStrings commonUiStrings = (CommonUIStrings) GWT.create(CommonUIStrings.class);
+		
+		/* Build the template */
+		final AutomationPortalUITemplate template = new AutomationPortalUITemplate(commonUiStrings);
 
 		/* Get the client factory */
 		final AutomationPortalUIClientFactory topikaClientFactory = GWT.create(AutomationPortalUIClientFactory.class);
-		topikaClientFactory.initialise(commonUiStrings, apuiErrors);
+		topikaClientFactory.initialise(template, commonUiStrings, apuiErrors);
 
 		final EventBus eventBus = topikaClientFactory.getEventBus();
 		final PlaceController placeController = topikaClientFactory.getPlaceController();
@@ -61,8 +65,6 @@ public class AutomationPortalUI implements EntryPoint
 		/* Goes to the place represented on URL else default place */
 		historyHandler.handleCurrentHistory();
 		
-		/* Add the template to the page */
-		final RootPanel rootPanel = RootPanel.get();
-		rootPanel.add(root);
+		
 	}
 }

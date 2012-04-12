@@ -9,6 +9,8 @@ public interface CommonUIStrings extends Constants
 	String Output();
 	String Username();
 	String Password();
+	String AutomationPortal();
+	String BugzillaReportGenerator();
 }
 
 
