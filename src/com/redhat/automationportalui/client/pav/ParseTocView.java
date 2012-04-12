@@ -87,6 +87,8 @@ public class ParseTocView
 		topLevelPanel.add(go);
 		
 		template.getContentPanel().setWidget(topLevelPanel);
+		
+		enableUI(true);
 	}
 
 	private void run()

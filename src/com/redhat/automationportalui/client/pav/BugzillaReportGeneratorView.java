@@ -104,6 +104,8 @@ public class BugzillaReportGeneratorView
 		topLevelPanel.add(requirements);
 		
 		template.getContentPanel().setWidget(topLevelPanel);
+		
+		enableUI(true);
 	}
 
 	private void run()
