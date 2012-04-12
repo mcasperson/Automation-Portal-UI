@@ -15,7 +15,6 @@ import com.redhat.automationportalui.client.constants.AutomationPortalUIConstant
 import com.redhat.automationportalui.client.data.AutomationPortalResponseData;
 import com.redhat.automationportalui.client.data.AutomationPortalResponseDataFactory;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
-import com.redhat.automationportalui.client.resources.BugzillaReportGeneratorUIStrings;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
 import com.redhat.automationportalui.client.resources.ParseTocUIStrings;
 import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
