@@ -1,5 +1,6 @@
 package com.redhat.automationportalui.client.template;
 
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.Hyperlink;
@@ -7,6 +8,7 @@ import com.google.gwt.user.client.ui.Label;
 import com.google.gwt.user.client.ui.RootPanel;
 import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.redhat.automationportalui.client.AutomationPortalUIAppPlaceHistoryMapper;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
 
@@ -59,8 +61,9 @@ public class AutomationPortalUITemplate
 	
 	private void buildLinks()
 	{
-		final BugzillaReportGeneratorPlace bugzillaReportGeneratorPlace = new BugzillaReportGeneratorPlace();
-		final Hyperlink bugzillaReportGenerator = new Hyperlink(commonUiStrings.BugzillaReportGenerator(), bugzillaReportGeneratorPlace.toString());
+		final AutomationPortalUIAppPlaceHistoryMapper placeHistoryMapper = GWT.create(AutomationPortalUIAppPlaceHistoryMapper.class);
+		
+		final Hyperlink bugzillaReportGenerator = new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace()));
 		linksVerticalPanel.add(bugzillaReportGenerator);
 	}
 }
