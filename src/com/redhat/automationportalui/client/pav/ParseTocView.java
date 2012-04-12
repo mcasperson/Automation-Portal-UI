@@ -139,5 +139,6 @@ public class ParseTocView
 	private void enableUI(final boolean enabled)
 	{
 		go.setEnabled(enabled);
+		template.showLoadingImage(!enabled);
 	}
 }

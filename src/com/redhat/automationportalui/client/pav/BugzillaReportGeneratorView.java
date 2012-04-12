@@ -158,6 +158,7 @@ public class BugzillaReportGeneratorView
 	
 	private void enableUI(final boolean enabled)
 	{
+		template.showLoadingImage(!enabled);
 		go.setEnabled(enabled);
 		bugzillaUsername.setEnabled(enabled);
 		bugzillaPassword.setEnabled(enabled);	
