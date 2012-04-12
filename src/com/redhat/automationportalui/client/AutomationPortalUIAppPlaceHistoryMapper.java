@@ -4,6 +4,7 @@ import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
 import com.redhat.automationportalui.client.pav.ParseTocPlace;
+import com.redhat.automationportalui.client.pav.SVNStatsPlace;
 
 /**
  * TopikaAppPlaceHistoryMapper declares all the GWT Places available in Topika.
@@ -14,7 +15,8 @@ import com.redhat.automationportalui.client.pav.ParseTocPlace;
  */
 @WithTokenizers({ 
 	BugzillaReportGeneratorPlace.Tokenizer.class,
-	ParseTocPlace.Tokenizer.class
+	ParseTocPlace.Tokenizer.class,
+	SVNStatsPlace.Tokenizer.class
 })
 public interface AutomationPortalUIAppPlaceHistoryMapper extends PlaceHistoryMapper
 {

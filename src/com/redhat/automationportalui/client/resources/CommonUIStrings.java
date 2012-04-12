@@ -13,6 +13,7 @@ public interface CommonUIStrings extends Constants
 	String BugzillaReportGenerator();
 	String ParseTOC();
 	String PleaseBePatient();
+	String SVNStats();
 }
 
 

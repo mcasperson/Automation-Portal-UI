@@ -5,6 +5,7 @@ import com.google.gwt.event.shared.SimpleEventBus;
 import com.google.gwt.place.shared.PlaceController;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorView;
 import com.redhat.automationportalui.client.pav.ParseTocView;
+import com.redhat.automationportalui.client.pav.SVNStatsView;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
 import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
@@ -16,6 +17,7 @@ public class AutomationPortalUIClientFactoryImpl implements AutomationPortalUICl
     
     private BugzillaReportGeneratorView bugzillaReportGeneratorView;
     private ParseTocView parseTocView;
+    private SVNStatsView svnStatsView;
     
 	@Override
 	public PlaceController getPlaceController()
@@ -40,13 +42,19 @@ public class AutomationPortalUIClientFactoryImpl implements AutomationPortalUICl
 	{
 		bugzillaReportGeneratorView = new BugzillaReportGeneratorView(this, template, commonUiStrings, apuiErrors);
 		parseTocView = new ParseTocView(this, template, commonUiStrings, apuiErrors);
-		
+		svnStatsView = new SVNStatsView(this, template, commonUiStrings, apuiErrors);
 	}
 
 	@Override
 	public ParseTocView getParseTocView()
 	{
 		return parseTocView;
+	}
+
+	@Override
+	public SVNStatsView getSVNStatsView()
+	{
+		return svnStatsView;
 	}
 
 }
