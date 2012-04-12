@@ -4,6 +4,7 @@ import com.google.gwt.place.shared.PlaceHistoryMapper;
 import com.google.gwt.place.shared.WithTokenizers;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
 import com.redhat.automationportalui.client.pav.ParseTocPlace;
+import com.redhat.automationportalui.client.pav.RegenSplashPlace;
 import com.redhat.automationportalui.client.pav.SVNStatsPlace;
 
 /**
@@ -16,7 +17,8 @@ import com.redhat.automationportalui.client.pav.SVNStatsPlace;
 @WithTokenizers({ 
 	BugzillaReportGeneratorPlace.Tokenizer.class,
 	ParseTocPlace.Tokenizer.class,
-	SVNStatsPlace.Tokenizer.class
+	SVNStatsPlace.Tokenizer.class,
+	RegenSplashPlace.Tokenizer.class
 })
 public interface AutomationPortalUIAppPlaceHistoryMapper extends PlaceHistoryMapper
 {

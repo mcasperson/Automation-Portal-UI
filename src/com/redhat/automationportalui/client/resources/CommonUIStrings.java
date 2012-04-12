@@ -14,6 +14,7 @@ public interface CommonUIStrings extends Constants
 	String ParseTOC();
 	String PleaseBePatient();
 	String SVNStats();
+	String RegenSplash();
 }
 
 

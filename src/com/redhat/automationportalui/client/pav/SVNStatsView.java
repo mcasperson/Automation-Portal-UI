@@ -18,7 +18,7 @@ import com.redhat.automationportalui.client.data.AutomationPortalResponseDataFac
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.BugzillaReportGeneratorUIStrings;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
-import com.redhat.automationportalui.client.resources.SVNStats;
+import com.redhat.automationportalui.client.resources.SVNStatsUIStrings;
 import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -31,7 +31,7 @@ public class SVNStatsView
 {
 	private final static String REST_ENDPOINT = "rest/SVNStats/get/json";
 	private final AutomationPortalUITemplate template;
-	private final SVNStats uiStrings;
+	private final SVNStatsUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
 	private TextBox message;
 	private TextArea output;
@@ -40,7 +40,7 @@ public class SVNStatsView
 	public SVNStatsView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
 		/* Get the translates log messages */
-		uiStrings = (SVNStats) GWT.create(SVNStats.class);
+		uiStrings = (SVNStatsUIStrings) GWT.create(SVNStatsUIStrings.class);
 		this.commonUiStrings = commonUiStrings;
 		this.template = template;
 	}

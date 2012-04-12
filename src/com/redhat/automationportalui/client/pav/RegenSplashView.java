@@ -6,6 +6,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
@@ -17,43 +18,48 @@ import com.redhat.automationportalui.client.data.AutomationPortalResponseDataFac
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.BugzillaReportGeneratorUIStrings;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
-import com.redhat.automationportalui.client.resources.ParseTocUIStrings;
+import com.redhat.automationportalui.client.resources.RegenSplashUIStrings;
+import com.redhat.automationportalui.client.resources.SVNStatsUIStrings;
 import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.URL;
 
-public class ParseTocView
+public class RegenSplashView
 {
-	private final static String REST_ENDPOINT = "rest/ParseTOC/get/json";
+	private final static String REST_ENDPOINT = "rest/SVNStats/get/json";
 	private final AutomationPortalUITemplate template;
-	private final ParseTocUIStrings uiStrings;
+	private final RegenSplashUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
 	private TextBox message;
 	private TextArea output;
 	private PushButton go;
 
-	public ParseTocView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
+	public RegenSplashView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
 		/* Get the translates log messages */
-		uiStrings = (ParseTocUIStrings) GWT.create(ParseTocUIStrings.class);
+		uiStrings = (RegenSplashUIStrings) GWT.create(RegenSplashUIStrings.class);
 		this.commonUiStrings = commonUiStrings;
 		this.template = template;
 	}
 
 	public void display()
 	{
-		template.getSubTitle().setText(commonUiStrings.ParseTOC());
+		template.getSubTitle().setText(commonUiStrings.SVNStats());
 		
 		final VerticalPanel topLevelPanel = new VerticalPanel();
 
 		topLevelPanel.add(new HTML(uiStrings.Description()));
 		
 		final HTML descriptionLineTwo = new HTML(uiStrings.DescriptionLineTwo());
-		descriptionLineTwo.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineTwo);
+		
+		final HTML descriptionLineThree = new HTML(uiStrings.DescriptionLineThree());
+		descriptionLineThree.getElement().getStyle().setMarginBottom(2, Unit.EM);
+		topLevelPanel.add(descriptionLineThree);
 		
 		final Grid grid = new Grid(2, 2); 
 		topLevelPanel.add(grid);
@@ -85,6 +91,10 @@ public class ParseTocView
 			}
 		});
 		topLevelPanel.add(go);
+		
+		final HTML requirements = new HTML(uiStrings.Requirements());
+		requirements.getElement().getStyle().setMarginTop(2, Unit.EM);
+		topLevelPanel.add(requirements);
 		
 		template.getContentPanel().setWidget(topLevelPanel);
 		
@@ -140,7 +150,7 @@ public class ParseTocView
 	
 	private void enableUI(final boolean enabled)
 	{
-		go.setEnabled(enabled);
 		template.showLoadingImage(!enabled);
+		go.setEnabled(enabled);	
 	}
 }

@@ -7,6 +7,10 @@ import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorActivity;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
 import com.redhat.automationportalui.client.pav.ParseTocActivity;
 import com.redhat.automationportalui.client.pav.ParseTocPlace;
+import com.redhat.automationportalui.client.pav.RegenSplashActivity;
+import com.redhat.automationportalui.client.pav.RegenSplashPlace;
+import com.redhat.automationportalui.client.pav.SVNStatsActivity;
+import com.redhat.automationportalui.client.pav.SVNStatsPlace;
 
 /**
  * This class maps each Place to its corresponding Activity. See
@@ -34,6 +38,12 @@ public class AutomationPortalUIAppActivityMapper implements ActivityMapper
 		
 		if (place instanceof ParseTocPlace)
 			return new ParseTocActivity((ParseTocPlace) place, clientFactory);
+		
+		if (place instanceof SVNStatsPlace)
+			return new SVNStatsActivity((SVNStatsPlace) place, clientFactory);
+		
+		if (place instanceof RegenSplashPlace)
+			return new RegenSplashActivity((RegenSplashPlace) place, clientFactory);
 		
 		return null;
 	}

@@ -12,6 +12,7 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.redhat.automationportalui.client.AutomationPortalUIAppPlaceHistoryMapper;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
 import com.redhat.automationportalui.client.pav.ParseTocPlace;
+import com.redhat.automationportalui.client.pav.RegenSplashPlace;
 import com.redhat.automationportalui.client.pav.SVNStatsPlace;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
 import com.redhat.automationportalui.client.resources.ImageResources;
@@ -96,6 +97,7 @@ public class AutomationPortalUITemplate
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace())));
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.ParseTOC(), placeHistoryMapper.getToken(new ParseTocPlace())));
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.SVNStats(), placeHistoryMapper.getToken(new SVNStatsPlace())));
+		linksVerticalPanel.add(new Hyperlink(commonUiStrings.RegenSplash(), placeHistoryMapper.getToken(new RegenSplashPlace())));
 	}
 	
 	public void showLoadingImage(final boolean show)
