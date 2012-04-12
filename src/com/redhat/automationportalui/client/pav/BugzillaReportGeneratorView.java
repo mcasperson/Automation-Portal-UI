@@ -10,6 +10,7 @@ import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
@@ -33,7 +34,7 @@ public class BugzillaReportGeneratorView
 	private final BugzillaReportGeneratorUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
 	private TextBox bugzillaUsername;
-	private TextBox bugzillaPassword; 
+	private PasswordTextBox bugzillaPassword; 
 	private TextBox message;
 	private TextArea output;
 	private PushButton go;
@@ -63,7 +64,7 @@ public class BugzillaReportGeneratorView
 		grid.setWidget(0, 0, new HTML(uiStrings.BugzillaUsername()));
 		grid.setWidget(0, 1, bugzillaUsername);
 		
-		bugzillaPassword = new TextBox();
+		bugzillaPassword = new PasswordTextBox();
 		bugzillaPassword.setWidth("40em");
 		grid.setWidget(1, 0, new HTML(uiStrings.BugzillaPassword()));
 		grid.setWidget(1, 1, bugzillaPassword);
