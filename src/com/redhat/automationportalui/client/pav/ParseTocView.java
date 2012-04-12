@@ -17,6 +17,7 @@ import com.redhat.automationportalui.client.data.AutomationPortalResponseDataFac
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.BugzillaReportGeneratorUIStrings;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
+import com.redhat.automationportalui.client.resources.ParseToc;
 import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
 import com.google.gwt.http.client.Request;
 import com.google.gwt.http.client.RequestBuilder;
@@ -28,7 +29,7 @@ public class ParseTocView
 {
 	private final static String REST_ENDPOINT = "rest/ParseTOC/get/json";
 	private final AutomationPortalUITemplate template;
-	private final BugzillaReportGeneratorUIStrings uiStrings;
+	private final ParseToc uiStrings;
 	private final CommonUIStrings commonUiStrings;
 	private TextBox message;
 	private TextArea output;
@@ -37,7 +38,7 @@ public class ParseTocView
 	public ParseTocView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
 		/* Get the translates log messages */
-		uiStrings = (BugzillaReportGeneratorUIStrings) GWT.create(BugzillaReportGeneratorUIStrings.class);
+		uiStrings = (ParseToc) GWT.create(ParseToc.class);
 		this.commonUiStrings = commonUiStrings;
 		this.template = template;
 	}
@@ -86,10 +87,6 @@ public class ParseTocView
 		topLevelPanel.add(go);
 		
 		template.getContentPanel().setWidget(topLevelPanel);
-		
-		final HTML requirements = new HTML(uiStrings.Requirements());
-		requirements.getElement().getStyle().setMarginTop(2, Unit.EM);
-		topLevelPanel.add(requirements);
 	}
 
 	private void run()
