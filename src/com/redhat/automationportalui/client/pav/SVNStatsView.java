@@ -82,7 +82,7 @@ public class SVNStatsView
 				run();
 			}
 		});
-		topLevelPanel.add(go);
+		//topLevelPanel.add(go);
 		
 		final HTML requirements = new HTML(uiStrings.Requirements());
 		requirements.getElement().getStyle().setMarginTop(2, Unit.EM);
