@@ -3,6 +3,9 @@ package com.redhat.automationportalui.client.pav;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceTokenizer;
 
+/**
+ * A GWT Place that represents the state of the SVNStats View
+ */
 public class SVNStatsPlace extends Place
 {
 	public SVNStatsPlace()

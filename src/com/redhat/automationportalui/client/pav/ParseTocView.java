@@ -23,6 +23,9 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 
+/**
+ * A GWT View that represents the ParseTOC UI
+ */
 public class ParseTocView
 {
 	private final static String REST_ENDPOINT = "rest/ParseTOC/get/json/Execute";

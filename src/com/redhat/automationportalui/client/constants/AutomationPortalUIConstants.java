@@ -1,5 +1,9 @@
 package com.redhat.automationportalui.client.constants;
 
+/**
+ * Defines constant variables used throughout the application
+ *
+ */
 public final class AutomationPortalUIConstants
 {
 	/** The hostname of the Automation Portal REST server */

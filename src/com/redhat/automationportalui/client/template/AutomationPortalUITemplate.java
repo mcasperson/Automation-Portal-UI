@@ -38,11 +38,19 @@ public class AutomationPortalUITemplate
 	/** An image to be displayed when the page is loading */
 	private final Image loadingImage;
 	
+	/**
+	 * 
+	 * @return The Label that displays the page sub title
+	 */
 	public Label getSubTitle()
 	{
 		return subTitle;
 	}
 
+	/**
+	 * 
+	 * @return The Panel that holds the GWT View UIs
+	 */
 	public SimplePanel getContentPanel()
 	{
 		return contentPanel;
@@ -90,6 +98,9 @@ public class AutomationPortalUITemplate
 		rootPanel.add(verticalPanel);	
 	}
 	
+	/**
+	 * Builds the links that appear down the left hand side of the interface
+	 */
 	private void buildLinks()
 	{
 		final AutomationPortalUIAppPlaceHistoryMapper placeHistoryMapper = GWT.create(AutomationPortalUIAppPlaceHistoryMapper.class);
@@ -100,6 +111,10 @@ public class AutomationPortalUITemplate
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.RegenSplash(), placeHistoryMapper.getToken(new RegenSplashPlace())));
 	}
 	
+	/**
+	 * Shows or hides the loading "throbber"
+	 * @param show true if the loading image is to be shown, false if it is to be hidden
+	 */
 	public void showLoadingImage(final boolean show)
 	{
 		if (show)

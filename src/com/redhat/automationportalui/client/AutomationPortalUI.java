@@ -18,8 +18,6 @@ import com.redhat.automationportalui.client.template.AutomationPortalUITemplate;
  */
 public class AutomationPortalUI implements EntryPoint
 {
-	private final SimplePanel root = new SimplePanel();
-	
 	/**
 	 * Sets up the GWT Activities and Places, which provide bookmarkable URLs.
 	 * This code is mostly from
@@ -48,8 +46,8 @@ public class AutomationPortalUI implements EntryPoint
 		/* Start ActivityManager for the main widget with our ActivityMapper */
 		final AutomationPortalUIAppActivityMapper activityMapper = new AutomationPortalUIAppActivityMapper(topikaClientFactory);
 		final ActivityManager activityManager = new ActivityManager(activityMapper, eventBus);
-		activityManager.setDisplay(root);
-
+		activityManager.setDisplay(template.getContentPanel());
+		
 		/* Start PlaceHistoryHandler with our PlaceHistoryMapper */
 		final AutomationPortalUIAppPlaceHistoryMapper historyMapper = GWT.create(AutomationPortalUIAppPlaceHistoryMapper.class);
 		final PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(historyMapper);

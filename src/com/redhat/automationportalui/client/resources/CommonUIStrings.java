@@ -2,6 +2,9 @@ package com.redhat.automationportalui.client.resources;
 
 import com.google.gwt.i18n.client.Constants;
 
+/**
+ * Strings that are used throughout the UI
+ */
 public interface CommonUIStrings extends Constants
 {
 	String Go();

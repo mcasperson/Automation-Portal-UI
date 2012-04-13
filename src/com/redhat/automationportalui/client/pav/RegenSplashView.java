@@ -31,6 +31,9 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 
+/**
+ * A GWT View that represents the RegenSplash UI
+ */
 public class RegenSplashView
 {
 	private final static String REST_ENDPOINT = "rest/RegenSplash/get/json/Execute";

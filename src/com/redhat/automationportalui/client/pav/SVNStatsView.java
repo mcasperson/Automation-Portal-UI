@@ -23,6 +23,9 @@ import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 
+/**
+ * A GWT View that represents the SVNStats UI
+ */
 public class SVNStatsView
 {
 	private final static String REST_ENDPOINT = "rest/SVNStats/get/json/Execute";

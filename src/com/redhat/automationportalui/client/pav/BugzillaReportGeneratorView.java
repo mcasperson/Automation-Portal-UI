@@ -25,6 +25,9 @@ import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 
+/**
+ * A GWT View that represents the Generate Bugzilla Report UI
+ */
 public class BugzillaReportGeneratorView
 {
 	private final static String REST_ENDPOINT = "rest/BugzillaReportGenerator/get/json/Execute";

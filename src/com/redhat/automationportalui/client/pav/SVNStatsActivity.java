@@ -5,7 +5,9 @@ import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.redhat.automationportalui.client.AutomationPortalUIClientFactory;
 
-
+/**
+ * A GWT Activity to launch the SVNStats View
+ */
 public class SVNStatsActivity extends AbstractActivity
 {
 	private final AutomationPortalUIClientFactory clientFactory;
