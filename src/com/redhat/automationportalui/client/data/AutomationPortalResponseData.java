@@ -18,4 +18,9 @@ public final class AutomationPortalResponseData extends JavaScriptObject
 	{
 		
 	}
+	
+	public static final native AutomationPortalResponseData convert(final String json) 
+	/*-{
+		return eval('(' + json + ')');
+	}-*/;
 }

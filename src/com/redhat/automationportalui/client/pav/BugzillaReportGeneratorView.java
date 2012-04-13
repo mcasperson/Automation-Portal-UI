@@ -14,7 +14,6 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.redhat.automationportalui.client.AutomationPortalUIClientFactory;
 import com.redhat.automationportalui.client.constants.AutomationPortalUIConstants;
 import com.redhat.automationportalui.client.data.AutomationPortalResponseData;
-import com.redhat.automationportalui.client.data.AutomationPortalResponseDataFactory;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.BugzillaReportGeneratorUIStrings;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
@@ -136,7 +135,7 @@ public class BugzillaReportGeneratorView
 					if (200 == response.getStatusCode())
 					{
 						final String jsonResponse = response.getText();
-						final AutomationPortalResponseData responseData = AutomationPortalResponseDataFactory.asAutomationPortalResponseData(jsonResponse);
+						final AutomationPortalResponseData responseData = AutomationPortalResponseData.convert(jsonResponse);
 						message.setText(responseData.getMessage());
 						output.setText(responseData.getOutput());
 					}
