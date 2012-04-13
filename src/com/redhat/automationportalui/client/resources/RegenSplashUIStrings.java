@@ -8,4 +8,6 @@ public interface RegenSplashUIStrings extends Constants
 	String DescriptionLineTwo();
 	String DescriptionLineThree();
 	String Requirements();
+	String Environment();
+	String Product();
 }

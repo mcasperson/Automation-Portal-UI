@@ -25,7 +25,7 @@ import com.google.gwt.http.client.Response;
 
 public class SVNStatsView
 {
-	private final static String REST_ENDPOINT = "rest/SVNStats/get/json";
+	private final static String REST_ENDPOINT = "rest/SVNStats/get/json/Execute";
 	private final AutomationPortalUITemplate template;
 	private final SVNStatsUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;

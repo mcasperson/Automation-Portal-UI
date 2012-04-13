@@ -27,7 +27,7 @@ import com.google.gwt.http.client.URL;
 
 public class BugzillaReportGeneratorView
 {
-	private final static String REST_ENDPOINT = "rest/BugzillaReportGenerator/get/json";
+	private final static String REST_ENDPOINT = "rest/BugzillaReportGenerator/get/json/Execute";
 	private final AutomationPortalUITemplate template;
 	private final BugzillaReportGeneratorUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;

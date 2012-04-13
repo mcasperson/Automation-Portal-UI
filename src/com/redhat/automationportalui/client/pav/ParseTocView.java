@@ -25,7 +25,7 @@ import com.google.gwt.http.client.Response;
 
 public class ParseTocView
 {
-	private final static String REST_ENDPOINT = "rest/ParseTOC/get/json";
+	private final static String REST_ENDPOINT = "rest/ParseTOC/get/json/Execute";
 	private final AutomationPortalUITemplate template;
 	private final ParseTocUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
