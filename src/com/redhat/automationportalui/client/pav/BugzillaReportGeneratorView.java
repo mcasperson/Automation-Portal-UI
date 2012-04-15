@@ -123,7 +123,7 @@ public class BugzillaReportGeneratorView
 		final String username = bugzillaUsername.getText();
 		final String password = bugzillaPassword.getText();
 		
-		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + "?bugzillaUsername=" + URL.encode(username) + "&bugzillaPassword=" + URL.encode(password); 
+		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + "?bugzillaUsername=" + URL.encodeQueryString(username) + "&bugzillaPassword=" + URL.encodeQueryString(password); 
 		
 		// Send request to server and catch any errors.
 		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, restUrl);

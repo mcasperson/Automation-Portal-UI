@@ -263,10 +263,10 @@ public class RegenSplashView
 		enableUI(false);
 
 		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + 
-				"?tocUrl=" + URL.encode(this.environments.getValue(this.environments.getSelectedIndex())) +
-				"&productName=" + URL.encode(this.products.getValue(this.products.getSelectedIndex())) +
-				"&username=" + URL.encode(this.kerberosUsername.getText()) +
-				"&password=" + URL.encode(this.kerberosPassword.getText());
+				"?tocUrl=" + URL.encodeQueryString(this.environments.getValue(this.environments.getSelectedIndex())) +
+				"&productName=" + URL.encodeQueryString(this.products.getValue(this.products.getSelectedIndex())) +
+				"&username=" + URL.encodeQueryString(this.kerberosUsername.getText()) +
+				"&password=" + URL.encodeQueryString(this.kerberosPassword.getText());
 
 		// Send request to server and catch any errors.
 		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, restUrl);
@@ -284,17 +284,16 @@ public class RegenSplashView
 				@Override
 				public void onResponseReceived(final Request request, final Response response)
 				{
-					if (200 == response.getStatusCode())
+					try
 					{
 						final String jsonResponse = response.getText();
 						final AutomationPortalResponseData responseData = AutomationPortalResponseData.convert(jsonResponse);
 						message.setText(responseData.getMessage());
 						output.setText(responseData.getOutput());
 					}
-					else
+					catch (final Exception ex)
 					{
-						// displayError("Couldn't retrieve JSON (" +
-						// response.getStatusText() + ")");
+						// an unexpected error has occurred
 					}
 
 					enableUI(true);
