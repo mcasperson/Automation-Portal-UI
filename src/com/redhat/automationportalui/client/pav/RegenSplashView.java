@@ -74,8 +74,12 @@ public class RegenSplashView
 		topLevelPanel.add(descriptionLineTwo);
 
 		final HTML descriptionLineThree = new HTML(uiStrings.DescriptionLineThree());
-		descriptionLineThree.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineThree);
+		
+		final HTML pleaseBePatient = new HTML(commonUiStrings.PleaseBePatient());
+		pleaseBePatient.getElement().getStyle().setMarginBottom(2, Unit.EM);
+		pleaseBePatient.getElement().getStyle().setColor("red");
+		topLevelPanel.add(pleaseBePatient);
 
 		final Grid grid = new Grid(9, 2);
 		grid.getElement().getStyle().setMarginBottom(1, Unit.EM);
@@ -261,6 +265,9 @@ public class RegenSplashView
 	private void run()
 	{
 		enableUI(false);
+		
+		this.message.setText("");
+		this.output.setText("");
 
 		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + 
 				"?tocUrl=" + URL.encodeQueryString(this.environments.getValue(this.environments.getSelectedIndex())) +

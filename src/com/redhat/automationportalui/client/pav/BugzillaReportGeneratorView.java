@@ -120,6 +120,9 @@ public class BugzillaReportGeneratorView
 	{
 		enableUI(false);
 		
+		this.message.setText("");
+		this.output.setText("");
+		
 		final String username = bugzillaUsername.getText();
 		final String password = bugzillaPassword.getText();
 		

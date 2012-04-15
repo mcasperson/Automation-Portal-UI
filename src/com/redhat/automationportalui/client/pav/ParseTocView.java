@@ -104,6 +104,9 @@ public class ParseTocView
 	{
 		enableUI(false);
 		
+		this.message.setText("");
+		this.output.setText("");
+		
 		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT; 
 		
 		// Send request to server and catch any errors.

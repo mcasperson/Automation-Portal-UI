@@ -9,5 +9,4 @@ public interface SVNStatsUIStrings extends Constants
 {
 	String Description();
 	String DescriptionLineTwo();
-	String Requirements();
 }
