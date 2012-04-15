@@ -12,6 +12,7 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
+import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
@@ -44,7 +45,7 @@ public class RegenSplashView
 	private final RegenSplashUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
 	private TextBox kerberosUsername;
-	private TextBox kerberosPassword;
+	private PasswordTextBox kerberosPassword;
 	private TextBox message;
 	private TextArea output;
 	private PushButton go;
@@ -88,7 +89,7 @@ public class RegenSplashView
 		grid.setWidget(1, 0, new HTML(commonUiStrings.KerberosUsername()));
 		grid.setWidget(1, 1, kerberosUsername);
 		
-		kerberosPassword = new TextBox();
+		kerberosPassword = new PasswordTextBox();
 		grid.setWidget(2, 0, new HTML(commonUiStrings.KerberosPassword()));
 		grid.setWidget(2, 1, kerberosPassword);
 		
@@ -182,7 +183,7 @@ public class RegenSplashView
 				run();
 			}
 		});
-		grid.setWidget(5, 1, go);
+		grid.setWidget(5, 0, go);
 
 		final HTML resultsLabel = new HTML(commonUiStrings.Results());
 		resultsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
@@ -261,7 +262,11 @@ public class RegenSplashView
 	{
 		enableUI(false);
 
-		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT;
+		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + 
+				"?tocUrl=" + URL.encode(this.environments.getValue(this.environments.getSelectedIndex())) +
+				"&productName=" + URL.encode(this.products.getValue(this.products.getSelectedIndex())) +
+				"&username=" + URL.encode(this.kerberosUsername.getText()) +
+				"&password=" + URL.encode(this.kerberosPassword.getText());
 
 		// Send request to server and catch any errors.
 		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, restUrl);
