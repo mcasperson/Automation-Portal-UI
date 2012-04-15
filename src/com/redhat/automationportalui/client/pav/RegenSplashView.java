@@ -3,6 +3,7 @@ package com.redhat.automationportalui.client.pav;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsArrayString;
+import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
@@ -42,6 +43,8 @@ public class RegenSplashView
 	private final AutomationPortalUITemplate template;
 	private final RegenSplashUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
+	private TextBox kerberosUsername;
+	private TextBox kerberosPassword;
 	private TextBox message;
 	private TextArea output;
 	private PushButton go;
@@ -73,13 +76,26 @@ public class RegenSplashView
 		descriptionLineThree.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineThree);
 
-		final Grid grid = new Grid(4, 2);
+		final Grid grid = new Grid(5, 2);
+		grid.getElement().getStyle().setMarginBottom(1, Unit.EM);
 		topLevelPanel.add(grid);
 
+		final HTML optionsLabel = new HTML(commonUiStrings.Options());
+		optionsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
+		grid.setWidget(0, 0, optionsLabel);
+		
+		kerberosUsername = new TextBox();
+		grid.setWidget(1, 0, new HTML(commonUiStrings.KerberosUsername()));
+		grid.setWidget(1, 1, kerberosUsername);
+		
+		kerberosPassword = new TextBox();
+		grid.setWidget(2, 0, new HTML(commonUiStrings.KerberosPassword()));
+		grid.setWidget(2, 1, kerberosPassword);
+		
 		environments = new ListBox(false);
 		environments.addItem("", "");
-		grid.setWidget(0, 0, new HTML(uiStrings.Environment()));
-		grid.setWidget(0, 1, environments);
+		grid.setWidget(3, 0, new HTML(uiStrings.Environment()));
+		grid.setWidget(3, 1, environments);
 
 		environments.addChangeHandler(new ChangeHandler()
 		{
@@ -149,22 +165,9 @@ public class RegenSplashView
 		});
 
 		products = new ListBox(false);
-		grid.setWidget(1, 0, new HTML(uiStrings.Product()));
-		grid.setWidget(1, 1, products);
-
-		message = new TextBox();
-		message.setReadOnly(true);
-		message.setWidth("40em");
-		grid.setWidget(2, 0, new HTML(commonUiStrings.Message()));
-		grid.setWidget(2, 1, message);
-
-		output = new TextArea();
-		output.setReadOnly(true);
-		output.setWidth("40em");
-		output.setHeight("10em");
-		grid.setWidget(3, 0, new HTML(commonUiStrings.Output()));
-		grid.setWidget(3, 1, output);
-
+		grid.setWidget(4, 0, new HTML(uiStrings.Product()));
+		grid.setWidget(4, 1, products);
+		
 		go = new PushButton(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
@@ -181,9 +184,27 @@ public class RegenSplashView
 		});
 		//topLevelPanel.add(go);
 
-		final HTML requirements = new HTML(uiStrings.Requirements());
-		requirements.getElement().getStyle().setMarginTop(2, Unit.EM);
-		topLevelPanel.add(requirements);
+		final Grid resultsGrid = new Grid(3, 2);
+		topLevelPanel.add(resultsGrid);
+
+		final HTML resultsLabel = new HTML(commonUiStrings.Results());
+		resultsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
+		resultsGrid.setWidget(0, 0, resultsLabel);
+		
+		message = new TextBox();
+		message.setReadOnly(true);
+		message.setWidth("40em");
+		resultsGrid.setWidget(1, 0, new HTML(commonUiStrings.Message()));
+		resultsGrid.setWidget(1, 1, message);
+
+		output = new TextArea();
+		output.setReadOnly(true);
+		output.setWidth("40em");
+		output.setHeight("10em");
+		resultsGrid.setWidget(2, 0, new HTML(commonUiStrings.Output()));
+		resultsGrid.setWidget(2, 1, output);
+
+		
 
 		template.getContentPanel().setWidget(topLevelPanel);
 

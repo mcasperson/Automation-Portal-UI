@@ -18,6 +18,10 @@ public interface CommonUIStrings extends Constants
 	String PleaseBePatient();
 	String SVNStats();
 	String RegenSplash();
+	String KerberosUsername();
+	String KerberosPassword();
+	String Options();
+	String Results();
 }
 
 

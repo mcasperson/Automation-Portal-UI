@@ -101,10 +101,6 @@ public class BugzillaReportGeneratorView
 		});
 		topLevelPanel.add(go);
 		
-		final HTML requirements = new HTML(uiStrings.Requirements());
-		requirements.getElement().getStyle().setMarginTop(2, Unit.EM);
-		topLevelPanel.add(requirements);
-		
 		template.getContentPanel().setWidget(topLevelPanel);
 		
 		enableUI(true);

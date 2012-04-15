@@ -11,7 +11,6 @@ public interface BugzillaReportGeneratorUIStrings extends Constants
 	String DescriptionLineTwo();
 	String BugzillaUsername();
 	String BugzillaPassword();
-	String Requirements();
 }
 
 
