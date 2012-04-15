@@ -1,6 +1,7 @@
 package com.redhat.automationportalui.client.pav;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -60,31 +61,22 @@ public class BugzillaReportGeneratorView
 		descriptionLineTwo.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineTwo);
 		
-		final Grid grid = new Grid(4, 2); 
+		final Grid grid = new Grid(7, 2);
 		topLevelPanel.add(grid);
+
+		final HTML optionsLabel = new HTML(commonUiStrings.Options());
+		optionsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
+		grid.setWidget(0, 0, optionsLabel);
 		
 		bugzillaUsername = new TextBox();
 		bugzillaUsername.setWidth("40em");
-		grid.setWidget(0, 0, new HTML(uiStrings.BugzillaUsername()));
-		grid.setWidget(0, 1, bugzillaUsername);
+		grid.setWidget(1, 0, new HTML(uiStrings.BugzillaUsername()));
+		grid.setWidget(1, 1, bugzillaUsername);
 		
 		bugzillaPassword = new PasswordTextBox();
 		bugzillaPassword.setWidth("40em");
-		grid.setWidget(1, 0, new HTML(uiStrings.BugzillaPassword()));
-		grid.setWidget(1, 1, bugzillaPassword);
-		
-		message = new TextBox();
-		message.setReadOnly(true);
-		message.setWidth("40em");
-		grid.setWidget(2, 0, new HTML(commonUiStrings.Message()));
-		grid.setWidget(2, 1, message);
-		
-		output = new TextArea();
-		output.setReadOnly(true);
-		output.setWidth("40em");
-		output.setHeight("10em");
-		grid.setWidget(3, 0, new HTML(commonUiStrings.Output()));
-		grid.setWidget(3, 1, output);
+		grid.setWidget(2, 0, new HTML(uiStrings.BugzillaPassword()));
+		grid.setWidget(2, 1, bugzillaPassword);
 		
 		go = new PushButton(commonUiStrings.Go());
 		go.setWidth("10em");
@@ -99,7 +91,25 @@ public class BugzillaReportGeneratorView
 				run();
 			}
 		});
-		topLevelPanel.add(go);
+		grid.setWidget(3, 0, go);
+
+		final HTML resultsLabel = new HTML(commonUiStrings.Results());
+		resultsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
+		resultsLabel.getElement().getStyle().setMarginTop(2, Unit.EM);
+		grid.setWidget(4, 0, resultsLabel);
+		
+		message = new TextBox();
+		message.setReadOnly(true);
+		message.setWidth("40em");
+		grid.setWidget(5, 0, new HTML(commonUiStrings.Message()));
+		grid.setWidget(5, 1, message);
+		
+		output = new TextArea();
+		output.setReadOnly(true);
+		output.setWidth("40em");
+		output.setHeight("10em");
+		grid.setWidget(6, 0, new HTML(commonUiStrings.Output()));
+		grid.setWidget(6, 1, output);
 		
 		template.getContentPanel().setWidget(topLevelPanel);
 		

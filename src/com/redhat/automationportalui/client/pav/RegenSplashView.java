@@ -76,7 +76,7 @@ public class RegenSplashView
 		descriptionLineThree.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineThree);
 
-		final Grid grid = new Grid(5, 2);
+		final Grid grid = new Grid(9, 2);
 		grid.getElement().getStyle().setMarginBottom(1, Unit.EM);
 		topLevelPanel.add(grid);
 
@@ -182,27 +182,25 @@ public class RegenSplashView
 				run();
 			}
 		});
-		//topLevelPanel.add(go);
-
-		final Grid resultsGrid = new Grid(3, 2);
-		topLevelPanel.add(resultsGrid);
+		grid.setWidget(5, 1, go);
 
 		final HTML resultsLabel = new HTML(commonUiStrings.Results());
 		resultsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
-		resultsGrid.setWidget(0, 0, resultsLabel);
+		resultsLabel.getElement().getStyle().setMarginTop(2, Unit.EM);
+		grid.setWidget(6, 0, resultsLabel);
 		
 		message = new TextBox();
 		message.setReadOnly(true);
 		message.setWidth("40em");
-		resultsGrid.setWidget(1, 0, new HTML(commonUiStrings.Message()));
-		resultsGrid.setWidget(1, 1, message);
+		grid.setWidget(7, 0, new HTML(commonUiStrings.Message()));
+		grid.setWidget(7, 1, message);
 
 		output = new TextArea();
 		output.setReadOnly(true);
 		output.setWidth("40em");
 		output.setHeight("10em");
-		resultsGrid.setWidget(2, 0, new HTML(commonUiStrings.Output()));
-		resultsGrid.setWidget(2, 1, output);
+		grid.setWidget(8, 0, new HTML(commonUiStrings.Output()));
+		grid.setWidget(8, 1, output);
 
 		
 
