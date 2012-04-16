@@ -22,6 +22,7 @@ import com.google.gwt.user.client.ui.HorizontalPanel;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
+import com.google.gwt.view.client.ProvidesKey;
 import com.google.gwt.view.client.SingleSelectionModel;
 import com.redhat.automationportalui.client.AutomationPortalUIClientFactory;
 import com.redhat.automationportalui.client.constants.AutomationPortalUIConstants;
@@ -84,7 +85,22 @@ public class SVNStatsView
 		descriptionLineTwo.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineTwo);
 
-		final CellTable<ConfigXMLData> table = new CellTable<ConfigXMLData>();
+		/*
+		 * This is to avoid the ConfigXMLData objects being serialized with a
+		 * $H. See
+		 * http://stackoverflow.com/questions/6226061/gwt-jsonobject-adding
+		 * -an-additional-incorrect-key-when-converting-overlay-type-t
+		 */
+		final ProvidesKey<ConfigXMLData> keyProvider = new ProvidesKey<ConfigXMLData>()
+		{
+			public Object getKey(final ConfigXMLData item)
+			{
+				// Always do a null check.
+				return (item == null) ? null : item.getPath().hashCode();
+			}
+		};
+
+		final CellTable<ConfigXMLData> table = new CellTable<ConfigXMLData>(keyProvider);
 
 		final DateTimeFormat dateFormat = DateTimeFormat.getFormat(PredefinedFormat.DATE_MEDIUM);
 		table.addColumn(createColumn(new DatePickerCell(dateFormat), new GetValue<Date>()
@@ -92,7 +108,7 @@ public class SVNStatsView
 			@Override
 			public Date getValue(final ConfigXMLData entry)
 			{
-				return new Date((long)entry.getFromDate().getTime());
+				return new Date((long) entry.getFromDate().getTime());
 			}
 		}), uiStrings.FromDate());
 
@@ -120,7 +136,7 @@ public class SVNStatsView
 
 		final SingleSelectionModel<ConfigXMLData> selectionModel = new SingleSelectionModel<ConfigXMLData>();
 		table.setSelectionModel(selectionModel);
-		
+
 		/* create a panel to hold the buttons */
 		final HorizontalPanel tableButtonPanel = new HorizontalPanel();
 		tableButtonPanel.getElement().getStyle().setMarginTop(2, Unit.EM);
@@ -137,7 +153,7 @@ public class SVNStatsView
 			}
 		});
 		addButton.setWidth("10em");
-		addButton.setHeight("2em");		
+		addButton.setHeight("2em");
 		tableButtonPanel.add(addButton);
 
 		final Button deleteButton = new Button(uiStrings.RemoveEntry());
@@ -159,7 +175,6 @@ public class SVNStatsView
 		deleteButton.setHeight("2em");
 		deleteButton.getElement().getStyle().setMarginLeft(2, Unit.EM);
 		tableButtonPanel.add(deleteButton);
-		
 
 		final Grid grid = new Grid(4, 2);
 		topLevelPanel.add(grid);
@@ -185,9 +200,11 @@ public class SVNStatsView
 		go = new Button(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
-		/*go.getElement().getStyle().setProperty("textAlign", "center");
-		go.getElement().getStyle().setProperty("display", "table-cell");
-		go.getElement().getStyle().setProperty("verticalAlign", "middle");*/
+		/*
+		 * go.getElement().getStyle().setProperty("textAlign", "center");
+		 * go.getElement().getStyle().setProperty("display", "table-cell");
+		 * go.getElement().getStyle().setProperty("verticalAlign", "middle");
+		 */
 		go.addClickHandler(new ClickHandler()
 		{
 			@Override
@@ -209,7 +226,7 @@ public class SVNStatsView
 
 		this.message.setText("");
 		this.output.setText("");
-		
+
 		/* build a JSON array of ConfigXMLData objects */
 		final StringBuilder entriesJson = new StringBuilder();
 		entriesJson.append("[");
