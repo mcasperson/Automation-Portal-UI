@@ -23,6 +23,7 @@ public interface CommonUIStrings extends Constants
 	String Options();
 	String Results();
 	String UnderConstruction();
+	String Depreciated();
 }
 
 

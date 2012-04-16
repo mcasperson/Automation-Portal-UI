@@ -104,11 +104,13 @@ public class AutomationPortalUITemplate
 	private void buildLinks()
 	{
 		final AutomationPortalUIAppPlaceHistoryMapper placeHistoryMapper = GWT.create(AutomationPortalUIAppPlaceHistoryMapper.class);
-		
+				
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace())));
+		linksVerticalPanel.add(new Hyperlink(commonUiStrings.RegenSplash(), placeHistoryMapper.getToken(new RegenSplashPlace())));
+		
+		linksVerticalPanel.add(new Label(commonUiStrings.Depreciated()));
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.ParseTOC(), placeHistoryMapper.getToken(new ParseTocPlace())));
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.SVNStats(), placeHistoryMapper.getToken(new SVNStatsPlace())));
-		linksVerticalPanel.add(new Hyperlink(commonUiStrings.RegenSplash(), placeHistoryMapper.getToken(new RegenSplashPlace())));
 	}
 	
 	/**
