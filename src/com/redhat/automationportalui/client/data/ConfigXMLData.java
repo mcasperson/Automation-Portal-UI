@@ -27,27 +27,27 @@ public class ConfigXMLData extends JavaScriptObject
 		return this.fromDate;
 	}-*/;
 
-	public native void setFromDate(final Date fromDate)
+	public native final void setFromDate(final Date fromDate)
 	/*-{
 		this.fromDate = fromDate;
 	}-*/;
 
-	public native String getPath()
+	public native final String getPath()
 	/*-{
 		return this.path;
 	}-*/;
 
-	public native void setPath(final String path)
+	public native final void setPath(final String path)
 	/*-{
 		this.path = path;
 	}-*/;
 
-	public native String getEntry()
+	public native final String getEntry()
 	/*-{
 		return this.entry;
 	}-*/;
 
-	public native void setEntry(final String entry)
+	public native final void setEntry(final String entry)
 	/*-{
 		this.entry = entry;
 	}-*/;
