@@ -8,6 +8,7 @@ import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.DatePickerCell;
 import com.google.gwt.cell.client.TextInputCell;
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -18,7 +19,6 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.user.client.ui.PushButton;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
 import com.google.gwt.user.client.ui.VerticalPanel;
@@ -36,6 +36,7 @@ import com.google.gwt.http.client.RequestBuilder;
 import com.google.gwt.http.client.RequestCallback;
 import com.google.gwt.http.client.RequestException;
 import com.google.gwt.http.client.Response;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
 
@@ -55,7 +56,7 @@ public class SVNStatsView
 	private final CommonUIStrings commonUiStrings;
 	private TextBox message;
 	private TextArea output;
-	private PushButton go;
+	private Button go;
 	private List<ConfigXMLData> entires = new ArrayList<ConfigXMLData>();
 
 	public SVNStatsView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
@@ -129,7 +130,7 @@ public class SVNStatsView
 			@Override
 			public void onClick(final ClickEvent event)
 			{
-				entires.add(new ConfigXMLData(new Date(), "", ""));
+				entires.add(ConfigXMLData.createConfigXMLData());
 				table.setRowData(entires);
 				table.setRowCount(entires.size());
 			}
@@ -141,7 +142,6 @@ public class SVNStatsView
 		final Button deleteButton = new Button(uiStrings.RemoveEntry());
 		deleteButton.addClickHandler(new ClickHandler()
 		{
-
 			@Override
 			public void onClick(final ClickEvent event)
 			{
@@ -155,11 +155,12 @@ public class SVNStatsView
 			}
 		});
 		deleteButton.setWidth("10em");
-		deleteButton.setHeight("2em");	
+		deleteButton.setHeight("2em");
+		deleteButton.getElement().getStyle().setMarginLeft(2, Unit.EM);
 		tableButtonPanel.add(deleteButton);
 		
 
-		final Grid grid = new Grid(3, 2);
+		final Grid grid = new Grid(4, 2);
 		topLevelPanel.add(grid);
 
 		final HTML resultsLabel = new HTML(commonUiStrings.Results());
@@ -180,12 +181,12 @@ public class SVNStatsView
 		grid.setWidget(2, 0, new HTML(commonUiStrings.Output()));
 		grid.setWidget(2, 1, output);
 
-		go = new PushButton(commonUiStrings.Go());
+		go = new Button(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
-		go.getElement().getStyle().setProperty("textAlign", "center");
+		/*go.getElement().getStyle().setProperty("textAlign", "center");
 		go.getElement().getStyle().setProperty("display", "table-cell");
-		go.getElement().getStyle().setProperty("verticalAlign", "middle");
+		go.getElement().getStyle().setProperty("verticalAlign", "middle");*/
 		go.addClickHandler(new ClickHandler()
 		{
 			@Override
@@ -194,7 +195,7 @@ public class SVNStatsView
 				run();
 			}
 		});
-		// topLevelPanel.add(go);
+		grid.setWidget(3, 0, go);
 
 		template.getContentPanel().setWidget(topLevelPanel);
 
@@ -207,8 +208,12 @@ public class SVNStatsView
 
 		this.message.setText("");
 		this.output.setText("");
+		
+		final JsArray<ConfigXMLData> entriesArray = ConfigXMLData.createArrayConfigXMLData();
+		for (final ConfigXMLData entry : entires)
+			entriesArray.push(entry);
 
-		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT;
+		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + "?entries=" + URL.encodeQueryString(entriesArray.toSource());
 
 		// Send request to server and catch any errors.
 		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, restUrl);
