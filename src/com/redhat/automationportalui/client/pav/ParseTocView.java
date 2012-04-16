@@ -5,6 +5,7 @@ import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PushButton;
@@ -35,7 +36,7 @@ public class ParseTocView
 	private final CommonUIStrings commonUiStrings;
 	private TextBox message;
 	private TextArea output;
-	private PushButton go;
+	private Button go;
 
 	public ParseTocView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
@@ -60,12 +61,12 @@ public class ParseTocView
 		final Grid grid = new Grid(4, 2); 
 		topLevelPanel.add(grid);
 		
-		go = new PushButton(commonUiStrings.Go());
+		go = new Button(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
-		go.getElement().getStyle().setProperty("textAlign", "center");
+		/*go.getElement().getStyle().setProperty("textAlign", "center");
 		go.getElement().getStyle().setProperty("display", "table-cell");
-		go.getElement().getStyle().setProperty("verticalAlign", "middle");
+		go.getElement().getStyle().setProperty("verticalAlign", "middle");*/
 		go.addClickHandler(new ClickHandler(){
 			@Override
 			public void onClick(final ClickEvent event)

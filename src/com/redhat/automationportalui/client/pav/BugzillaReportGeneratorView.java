@@ -5,6 +5,7 @@ import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.PasswordTextBox;
@@ -39,7 +40,7 @@ public class BugzillaReportGeneratorView
 	private PasswordTextBox bugzillaPassword; 
 	private TextBox message;
 	private TextArea output;
-	private PushButton go;
+	private Button go;
 
 	public BugzillaReportGeneratorView(final AutomationPortalUIClientFactory clientFactory, final AutomationPortalUITemplate template, final CommonUIStrings commonUiStrings, final APUI_Errors apuiErrors)
 	{
@@ -78,12 +79,12 @@ public class BugzillaReportGeneratorView
 		grid.setWidget(2, 0, new HTML(uiStrings.BugzillaPassword()));
 		grid.setWidget(2, 1, bugzillaPassword);
 		
-		go = new PushButton(commonUiStrings.Go());
+		go = new Button(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
-		go.getElement().getStyle().setProperty("textAlign", "center");
+		/*go.getElement().getStyle().setProperty("textAlign", "center");
 		go.getElement().getStyle().setProperty("display", "table-cell");
-		go.getElement().getStyle().setProperty("verticalAlign", "middle");
+		go.getElement().getStyle().setProperty("verticalAlign", "middle");*/
 		go.addClickHandler(new ClickHandler(){
 			@Override
 			public void onClick(final ClickEvent event)

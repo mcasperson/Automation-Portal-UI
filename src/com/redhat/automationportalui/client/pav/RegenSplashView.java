@@ -9,6 +9,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
 import com.google.gwt.user.client.ui.ListBox;
@@ -48,7 +49,7 @@ public class RegenSplashView
 	private PasswordTextBox kerberosPassword;
 	private TextBox message;
 	private TextArea output;
-	private PushButton go;
+	private Button go;
 	private ListBox environments;
 	private ListBox products;
 
@@ -170,12 +171,12 @@ public class RegenSplashView
 		grid.setWidget(4, 0, new HTML(uiStrings.Product()));
 		grid.setWidget(4, 1, products);
 		
-		go = new PushButton(commonUiStrings.Go());
+		go = new Button(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
-		go.getElement().getStyle().setProperty("textAlign", "center");
+		/*go.getElement().getStyle().setProperty("textAlign", "center");
 		go.getElement().getStyle().setProperty("display", "table-cell");
-		go.getElement().getStyle().setProperty("verticalAlign", "middle");
+		go.getElement().getStyle().setProperty("verticalAlign", "middle");*/
 		go.addClickHandler(new ClickHandler()
 		{
 			@Override
