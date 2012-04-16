@@ -22,6 +22,7 @@ public interface CommonUIStrings extends Constants
 	String KerberosPassword();
 	String Options();
 	String Results();
+	String UnderConstruction();
 }
 
 
