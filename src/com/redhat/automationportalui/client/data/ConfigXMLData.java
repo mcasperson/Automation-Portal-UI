@@ -1,20 +1,13 @@
 package com.redhat.automationportalui.client.data;
 
-import java.util.Date;
-
 import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsDate;
 
 public class ConfigXMLData extends JavaScriptObject
 {
 	public static native ConfigXMLData createConfigXMLData()
 	/*-{
-		return eval('({"fromDate"=new Date(),"path":"","entry":""})');
-	}-*/;
-	
-	public static native JsArray<ConfigXMLData> createArrayConfigXMLData()
-	/*-{
-		return eval('([])');
+		return eval('({"fromDate":new Date(),"path":"","entry":""})');
 	}-*/;
 	
 	protected ConfigXMLData()
@@ -22,12 +15,12 @@ public class ConfigXMLData extends JavaScriptObject
 
 	}
 
-	public native final Date getFromDate()
+	public native final JsDate getFromDate()
 	/*-{
 		return this.fromDate;
 	}-*/;
 
-	public native final void setFromDate(final Date fromDate)
+	public native final void setFromDate(final JsDate fromDate)
 	/*-{
 		this.fromDate = fromDate;
 	}-*/;

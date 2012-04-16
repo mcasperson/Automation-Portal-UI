@@ -39,6 +39,7 @@ import com.google.gwt.http.client.Response;
 import com.google.gwt.http.client.URL;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.i18n.client.DateTimeFormat.PredefinedFormat;
+import com.google.gwt.json.client.JSONObject;
 
 /**
  * A GWT View that represents the SVNStats UI
@@ -91,7 +92,7 @@ public class SVNStatsView
 			@Override
 			public Date getValue(final ConfigXMLData entry)
 			{
-				return entry.getFromDate();
+				return new Date((long)entry.getFromDate().getTime());
 			}
 		}), uiStrings.FromDate());
 
@@ -209,11 +210,18 @@ public class SVNStatsView
 		this.message.setText("");
 		this.output.setText("");
 		
-		final JsArray<ConfigXMLData> entriesArray = ConfigXMLData.createArrayConfigXMLData();
+		/* build a JSON array of ConfigXMLData objects */
+		final StringBuilder entriesJson = new StringBuilder();
+		entriesJson.append("[");
 		for (final ConfigXMLData entry : entires)
-			entriesArray.push(entry);
+		{
+			if (entriesJson.length() != 1)
+				entriesJson.append(",");
+			entriesJson.append(new JSONObject(entry).toString());
+		}
+		entriesJson.append("]");
 
-		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + "?entries=" + URL.encodeQueryString(entriesArray.toSource());
+		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + "?entries=" + URL.encodeQueryString(entriesJson.toString());
 
 		// Send request to server and catch any errors.
 		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, restUrl);
