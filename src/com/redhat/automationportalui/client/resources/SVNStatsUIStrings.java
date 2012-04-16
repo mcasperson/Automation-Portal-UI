@@ -9,4 +9,9 @@ public interface SVNStatsUIStrings extends Constants
 {
 	String Description();
 	String DescriptionLineTwo();
+	String FromDate();
+	String Path();
+	String Entry();
+	String AddEntry();
+	String RemoveEntry();
 }
