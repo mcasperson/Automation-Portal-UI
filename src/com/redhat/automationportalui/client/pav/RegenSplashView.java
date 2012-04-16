@@ -72,9 +72,6 @@ public class RegenSplashView
 
 		final HTML descriptionLineTwo = new HTML(uiStrings.DescriptionLineTwo());
 		topLevelPanel.add(descriptionLineTwo);
-
-		final HTML descriptionLineThree = new HTML(uiStrings.DescriptionLineThree());
-		topLevelPanel.add(descriptionLineThree);
 		
 		final HTML pleaseBePatient = new HTML(commonUiStrings.PleaseBePatient());
 		pleaseBePatient.getElement().getStyle().setMarginBottom(2, Unit.EM);
