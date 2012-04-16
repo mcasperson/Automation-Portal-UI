@@ -1,7 +1,6 @@
 package com.redhat.automationportalui.client.pav;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -127,6 +126,7 @@ public class SVNStatsView
 
 		final Button addButton = new Button(uiStrings.AddEntry(), new ClickHandler()
 		{
+			@Override
 			public void onClick(final ClickEvent event)
 			{
 				entires.add(new ConfigXMLData(new Date(), "", ""));
