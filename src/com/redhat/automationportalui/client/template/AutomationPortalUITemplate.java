@@ -108,7 +108,10 @@ public class AutomationPortalUITemplate
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace())));
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.RegenSplash(), placeHistoryMapper.getToken(new RegenSplashPlace())));
 		
-		linksVerticalPanel.add(new Label(commonUiStrings.Depreciated()));
+		final Label depreciated = new Label(commonUiStrings.Depreciated());
+		depreciated.getElement().getStyle().setMarginTop(2, Unit.EM);
+		
+		linksVerticalPanel.add(depreciated);
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.ParseTOC(), placeHistoryMapper.getToken(new ParseTocPlace())));
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.SVNStats(), placeHistoryMapper.getToken(new SVNStatsPlace())));
 	}
