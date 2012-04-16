@@ -6,9 +6,11 @@ import java.util.List;
 
 import com.google.gwt.cell.client.Cell;
 import com.google.gwt.cell.client.DatePickerCell;
+import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.TextInputCell;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -96,7 +98,7 @@ public class SVNStatsView
 			public Object getKey(final ConfigXMLData item)
 			{
 				// Always do a null check.
-				return (item == null) ? null : item.getPath().hashCode();
+				return (item == null) ? null : new Integer(entires.indexOf(item));
 			}
 		};
 
@@ -110,6 +112,13 @@ public class SVNStatsView
 			{
 				return new Date((long) entry.getFromDate().getTime());
 			}
+		}, new FieldUpdater<ConfigXMLData, Date>()
+		{
+			@Override
+			public void update(final int index, final ConfigXMLData object, final Date value)
+			{
+				object.setFromDate(JsDate.create(value.getTime()));
+			}
 		}), uiStrings.FromDate());
 
 		table.addColumn(createColumn(new TextInputCell(), new GetValue<String>()
@@ -119,6 +128,13 @@ public class SVNStatsView
 			{
 				return entry.getPath();
 			}
+		}, new FieldUpdater<ConfigXMLData, String>()
+		{
+			@Override
+			public void update(final int index, final ConfigXMLData object, final String value)
+			{
+				object.setPath(value);
+			}
 		}), uiStrings.Path());
 
 		table.addColumn(createColumn(new TextInputCell(), new GetValue<String>()
@@ -127,6 +143,13 @@ public class SVNStatsView
 			public String getValue(final ConfigXMLData entry)
 			{
 				return entry.getEntry();
+			}
+		}, new FieldUpdater<ConfigXMLData, String>()
+		{
+			@Override
+			public void update(final int index, final ConfigXMLData object, final String value)
+			{
+				object.setEntry(value);
 			}
 		}), uiStrings.Entry());
 
@@ -287,7 +310,7 @@ public class SVNStatsView
 		go.setEnabled(enabled);
 	}
 
-	private <C> Column<ConfigXMLData, C> createColumn(final Cell<C> cell, final GetValue<C> getter)
+	private <C> Column<ConfigXMLData, C> createColumn(final Cell<C> cell, final GetValue<C> getter, final FieldUpdater<ConfigXMLData, C> fieldUpdater)
 	{
 		Column<ConfigXMLData, C> column = new Column<ConfigXMLData, C>(cell)
 		{
@@ -297,7 +320,7 @@ public class SVNStatsView
 				return getter.getValue(object);
 			}
 		};
-
+		column.setFieldUpdater(fieldUpdater);
 		return column;
 	}
 }
