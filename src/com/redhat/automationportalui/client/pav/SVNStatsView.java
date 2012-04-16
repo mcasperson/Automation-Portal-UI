@@ -77,9 +77,9 @@ public class SVNStatsView
 
 		final VerticalPanel topLevelPanel = new VerticalPanel();
 
-		final HTML underConstruction = new HTML(commonUiStrings.UnderConstruction());
+		/*final HTML underConstruction = new HTML(commonUiStrings.UnderConstruction());
 		underConstruction.getElement().getStyle().setColor("red");
-		topLevelPanel.add(underConstruction);
+		topLevelPanel.add(underConstruction);*/
 
 		topLevelPanel.add(new HTML(uiStrings.Description()));
 
