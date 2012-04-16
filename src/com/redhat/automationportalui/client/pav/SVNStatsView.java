@@ -223,11 +223,6 @@ public class SVNStatsView
 		go = new Button(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
-		/*
-		 * go.getElement().getStyle().setProperty("textAlign", "center");
-		 * go.getElement().getStyle().setProperty("display", "table-cell");
-		 * go.getElement().getStyle().setProperty("verticalAlign", "middle");
-		 */
 		go.addClickHandler(new ClickHandler()
 		{
 			@Override
@@ -279,17 +274,16 @@ public class SVNStatsView
 				@Override
 				public void onResponseReceived(final Request request, final Response response)
 				{
-					if (200 == response.getStatusCode())
+					try
 					{
 						final String jsonResponse = response.getText();
 						final AutomationPortalResponseData responseData = AutomationPortalResponseData.convert(jsonResponse);
 						message.setText(responseData.getMessage());
 						output.setText(responseData.getOutput());
 					}
-					else
+					catch (final Exception ex)
 					{
-						// displayError("Couldn't retrieve JSON (" +
-						// response.getStatusText() + ")");
+						
 					}
 
 					enableUI(true);
