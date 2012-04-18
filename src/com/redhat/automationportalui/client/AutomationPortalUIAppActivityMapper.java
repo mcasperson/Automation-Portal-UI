@@ -5,8 +5,6 @@ import com.google.gwt.activity.shared.ActivityMapper;
 import com.google.gwt.place.shared.Place;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorActivity;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
-import com.redhat.automationportalui.client.pav.ParseTocActivity;
-import com.redhat.automationportalui.client.pav.ParseTocPlace;
 import com.redhat.automationportalui.client.pav.RegenSplashActivity;
 import com.redhat.automationportalui.client.pav.RegenSplashPlace;
 import com.redhat.automationportalui.client.pav.SVNStatsActivity;
@@ -35,9 +33,6 @@ public class AutomationPortalUIAppActivityMapper implements ActivityMapper
 	{
 		if (place instanceof BugzillaReportGeneratorPlace)
 			return new BugzillaReportGeneratorActivity((BugzillaReportGeneratorPlace) place, clientFactory);
-		
-		if (place instanceof ParseTocPlace)
-			return new ParseTocActivity((ParseTocPlace) place, clientFactory);
 		
 		if (place instanceof SVNStatsPlace)
 			return new SVNStatsActivity((SVNStatsPlace) place, clientFactory);

@@ -9,7 +9,6 @@ import com.google.gwt.cell.client.DatePickerCell;
 import com.google.gwt.cell.client.FieldUpdater;
 import com.google.gwt.cell.client.TextInputCell;
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.core.client.JsArray;
 import com.google.gwt.core.client.JsDate;
 import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
@@ -95,6 +94,7 @@ public class SVNStatsView
 		 */
 		final ProvidesKey<ConfigXMLData> keyProvider = new ProvidesKey<ConfigXMLData>()
 		{
+			@Override
 			public Object getKey(final ConfigXMLData item)
 			{
 				// Always do a null check.
