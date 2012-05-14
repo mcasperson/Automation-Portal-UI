@@ -100,25 +100,25 @@ public class FlagSearchView
 				run();
 			}
 		});
-		grid.setWidget(3, 0, go);
+		grid.setWidget(5, 0, go);
 
 		final HTML resultsLabel = new HTML(commonUiStrings.Results());
 		resultsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
 		resultsLabel.getElement().getStyle().setMarginTop(2, Unit.EM);
-		grid.setWidget(4, 0, resultsLabel);
+		grid.setWidget(6, 0, resultsLabel);
 		
 		message = new TextBox();
 		message.setReadOnly(true);
 		message.setWidth("40em");
-		grid.setWidget(5, 0, new HTML(commonUiStrings.Message()));
-		grid.setWidget(5, 1, message);
+		grid.setWidget(7, 0, new HTML(commonUiStrings.Message()));
+		grid.setWidget(7, 1, message);
 		
 		output = new TextArea();
 		output.setReadOnly(true);
 		output.setWidth("40em");
 		output.setHeight("10em");
-		grid.setWidget(6, 0, new HTML(commonUiStrings.Output()));
-		grid.setWidget(6, 1, output);
+		grid.setWidget(8, 0, new HTML(commonUiStrings.Output()));
+		grid.setWidget(8, 1, output);
 		
 		template.getContentPanel().setWidget(topLevelPanel);
 		
