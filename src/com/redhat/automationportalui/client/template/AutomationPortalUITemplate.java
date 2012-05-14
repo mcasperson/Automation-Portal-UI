@@ -11,6 +11,7 @@ import com.google.gwt.user.client.ui.SimplePanel;
 import com.google.gwt.user.client.ui.VerticalPanel;
 import com.redhat.automationportalui.client.AutomationPortalUIAppPlaceHistoryMapper;
 import com.redhat.automationportalui.client.pav.BugzillaReportGeneratorPlace;
+import com.redhat.automationportalui.client.pav.FlagSearchPlace;
 import com.redhat.automationportalui.client.pav.RegenSplashPlace;
 import com.redhat.automationportalui.client.pav.SVNStatsPlace;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
@@ -106,6 +107,7 @@ public class AutomationPortalUITemplate
 				
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.BugzillaReportGenerator(), placeHistoryMapper.getToken(new BugzillaReportGeneratorPlace())));
 		linksVerticalPanel.add(new Hyperlink(commonUiStrings.RegenSplash(), placeHistoryMapper.getToken(new RegenSplashPlace())));
+		linksVerticalPanel.add(new Hyperlink(commonUiStrings.FlagSearch(), placeHistoryMapper.getToken(new FlagSearchPlace())));
 		
 		final Label depreciated = new Label(commonUiStrings.Depreciated());
 		depreciated.getElement().getStyle().setMarginTop(2, Unit.EM);

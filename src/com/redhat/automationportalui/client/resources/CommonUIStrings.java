@@ -14,6 +14,7 @@ public interface CommonUIStrings extends Constants
 	String Password();
 	String AutomationPortal();
 	String BugzillaReportGenerator();
+	String FlagSearch();
 	String ParseTOC();
 	String PleaseBePatient();
 	String SVNStats();
