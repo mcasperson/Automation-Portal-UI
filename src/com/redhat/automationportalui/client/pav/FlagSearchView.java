@@ -215,6 +215,8 @@ public class FlagSearchView
 					}
 
 					enableUI(true);
+					
+					populateSavedSearches();
 				}
 			});
 		}
@@ -222,9 +224,7 @@ public class FlagSearchView
 		{
 			// displayError("Couldn't retrieve JSON");
 			enableUI(true);
-		}
-		finally
-		{
+			
 			populateSavedSearches();
 		}
 	}
