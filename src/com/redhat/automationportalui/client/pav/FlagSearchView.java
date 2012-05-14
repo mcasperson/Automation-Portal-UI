@@ -1,13 +1,18 @@
 package com.redhat.automationportalui.client.pav;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.core.client.JsArray;
+import com.google.gwt.core.client.JsArrayString;
 import com.google.gwt.dom.client.Style.FontWeight;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.CheckBox;
 import com.google.gwt.user.client.ui.Grid;
 import com.google.gwt.user.client.ui.HTML;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.ListBox;
 import com.google.gwt.user.client.ui.PasswordTextBox;
 import com.google.gwt.user.client.ui.TextArea;
 import com.google.gwt.user.client.ui.TextBox;
@@ -15,6 +20,8 @@ import com.google.gwt.user.client.ui.VerticalPanel;
 import com.redhat.automationportalui.client.AutomationPortalUIClientFactory;
 import com.redhat.automationportalui.client.constants.AutomationPortalUIConstants;
 import com.redhat.automationportalui.client.data.AutomationPortalResponseData;
+import com.redhat.automationportalui.client.data.StringList;
+import com.redhat.automationportalui.client.data.StringPair;
 import com.redhat.automationportalui.client.resources.APUI_Errors;
 import com.redhat.automationportalui.client.resources.CommonUIStrings;
 import com.redhat.automationportalui.client.resources.FlagSearchUIStrings;
@@ -32,6 +39,7 @@ import com.google.gwt.http.client.URL;
 public class FlagSearchView
 {
 	private final static String REST_ENDPOINT = "rest/FlagSearch/get/json/Execute";
+	private final static String SEARCHES_REST_ENDPOINT = "rest/FlagSearch/get/json/Searches";
 	private final AutomationPortalUITemplate template;
 	private final FlagSearchUIStrings uiStrings;
 	private final CommonUIStrings commonUiStrings;
@@ -39,6 +47,9 @@ public class FlagSearchView
 	private PasswordTextBox bugzillaPassword; 
 	private TextBox productName;
 	private TextBox component;
+	private TextBox saveAlias;
+	private CheckBox enableLoadSearch;
+	private ListBox loadSearch;
 	private TextBox message;
 	private TextArea output;
 	private Button go;
@@ -63,7 +74,7 @@ public class FlagSearchView
 		descriptionLineTwo.getElement().getStyle().setMarginBottom(2, Unit.EM);
 		topLevelPanel.add(descriptionLineTwo);
 		
-		final Grid grid = new Grid(9, 2);
+		final Grid grid = new Grid(11, 2);
 		topLevelPanel.add(grid);
 
 		final HTML optionsLabel = new HTML(commonUiStrings.Options());
@@ -90,6 +101,33 @@ public class FlagSearchView
 		grid.setWidget(4, 0, new HTML(uiStrings.Component()));
 		grid.setWidget(4, 1, component);
 		
+		saveAlias = new TextBox();
+		saveAlias.setWidth("40em");
+		grid.setWidget(5, 0, new HTML(uiStrings.Alias()));
+		grid.setWidget(5, 1, saveAlias);
+		
+		grid.setWidget(6, 0, new HTML(uiStrings.LoadSearch()));
+		
+		final HorizontalPanel loadPanel = new HorizontalPanel();
+		grid.setWidget(6, 1, loadPanel);
+		
+		enableLoadSearch = new CheckBox();
+		enableLoadSearch.addClickHandler(new ClickHandler(){
+			@Override
+			public void onClick(final ClickEvent event)
+			{
+				component.setEnabled(!enableLoadSearch.getValue());
+				productName.setEnabled(!enableLoadSearch.getValue());
+				saveAlias.setEnabled(!enableLoadSearch.getValue());
+				loadSearch.setEnabled(enableLoadSearch.getValue());
+			}
+		});
+		loadPanel.add(enableLoadSearch);
+		
+		loadSearch = new ListBox(false);
+		loadSearch.addItem("", "");
+		loadPanel.add(loadSearch);
+		
 		go = new Button(commonUiStrings.Go());
 		go.setWidth("10em");
 		go.setHeight("2em");
@@ -100,29 +138,77 @@ public class FlagSearchView
 				run();
 			}
 		});
-		grid.setWidget(5, 0, go);
+		grid.setWidget(7, 0, go);
 
 		final HTML resultsLabel = new HTML(commonUiStrings.Results());
 		resultsLabel.getElement().getStyle().setFontWeight(FontWeight.BOLD);
 		resultsLabel.getElement().getStyle().setMarginTop(2, Unit.EM);
-		grid.setWidget(6, 0, resultsLabel);
+		grid.setWidget(8, 0, resultsLabel);
 		
 		message = new TextBox();
 		message.setReadOnly(true);
 		message.setWidth("40em");
-		grid.setWidget(7, 0, new HTML(commonUiStrings.Message()));
-		grid.setWidget(7, 1, message);
+		grid.setWidget(9, 0, new HTML(commonUiStrings.Message()));
+		grid.setWidget(9, 1, message);
 		
 		output = new TextArea();
 		output.setReadOnly(true);
 		output.setWidth("40em");
 		output.setHeight("10em");
-		grid.setWidget(8, 0, new HTML(commonUiStrings.Output()));
-		grid.setWidget(8, 1, output);
+		grid.setWidget(10, 0, new HTML(commonUiStrings.Output()));
+		grid.setWidget(10, 1, output);
 		
 		template.getContentPanel().setWidget(topLevelPanel);
 		
-		enableUI(true);
+		final String sitesRestUrl = AutomationPortalUIConstants.REST_SERVER_URL + SEARCHES_REST_ENDPOINT;
+
+		// Send request to server and catch any errors.
+		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, sitesRestUrl);
+
+		try
+		{
+			builder.sendRequest(null, new RequestCallback()
+			{
+				@Override
+				public void onError(final Request request, final Throwable exception)
+				{
+					enableUI(true);
+				}
+
+				@Override
+				public void onResponseReceived(final Request request, final Response response)
+				{
+					try
+					{
+						if (200 == response.getStatusCode())
+						{
+							final String jsonResponse = response.getText();
+							final JsArrayString responseData = StringList.convertList(jsonResponse);
+
+							for (int i = 0; i < responseData.length(); ++i)
+							{
+								final String responseDataString = responseData.get(i);
+								loadSearch.addItem(responseDataString);
+							}
+						}
+						else
+						{
+							// displayError("Couldn't retrieve JSON (" +
+							// response.getStatusText() + ")");
+						}
+					}
+					finally
+					{
+						enableUI(true);
+					}
+				}
+			});
+		}
+		catch (final RequestException ex)
+		{
+			// displayError("Couldn't retrieve JSON");
+			enableUI(true);
+		}
 	}
 
 	private void run()
@@ -190,7 +276,9 @@ public class FlagSearchView
 		go.setEnabled(enabled);
 		bugzillaUsername.setEnabled(enabled);
 		bugzillaPassword.setEnabled(enabled);	
-		component.setEnabled(enabled);
-		productName.setEnabled(enabled);
+		component.setEnabled(enabled && !enableLoadSearch.getValue());
+		productName.setEnabled(enabled && !enableLoadSearch.getValue());
+		saveAlias.setEnabled(enabled && !enableLoadSearch.getValue());
+		loadSearch.setEnabled(enabled && enableLoadSearch.getValue());
 	}
 }

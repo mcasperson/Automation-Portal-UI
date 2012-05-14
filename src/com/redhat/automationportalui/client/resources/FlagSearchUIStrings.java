@@ -13,6 +13,8 @@ public interface FlagSearchUIStrings extends Constants
 	String BugzillaPassword();
 	String Component();
 	String ProductName();
+	String Alias();
+	String LoadSearch();
 }
 
 
