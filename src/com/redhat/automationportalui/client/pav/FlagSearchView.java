@@ -218,16 +218,19 @@ public class FlagSearchView
 		this.message.setText("");
 		this.output.setText("");
 		
+		final boolean loadSearchChecked = this.enableLoadSearch.getValue();
 		final String username = bugzillaUsername.getText();
 		final String password = bugzillaPassword.getText();
 		final String componentText = component.getText();
 		final String productNameText = productName.getText();
+		final String loadSearchText = loadSearch.getItemText(loadSearch.getSelectedIndex());
 		
 		final String restUrl = AutomationPortalUIConstants.REST_SERVER_URL + REST_ENDPOINT + 
 				"?bugzillaUsername=" + URL.encodeQueryString(username) + 
 				"&bugzillaPassword=" + URL.encodeQueryString(password) +
-				"&productName=" + URL.encodeQueryString(productNameText) +
-				"&component=" + URL.encodeQueryString(componentText);
+				"&productName=" + (loadSearchChecked?"":URL.encodeQueryString(productNameText)) +
+				"&component=" + (loadSearchChecked?"":URL.encodeQueryString(componentText)) +
+				"&loadSearch=" + (loadSearchChecked?URL.encodeQueryString(loadSearchText):"");
 		
 		// Send request to server and catch any errors.
 		final RequestBuilder builder = new RequestBuilder(RequestBuilder.GET, restUrl);
